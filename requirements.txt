@@ -1,0 +1,6 @@
+maxapi>=0.9
+aiosqlite>=0.19
+python-dotenv>=1.0
+Pillow>=10.0
+gspread>=6.0
+google-auth>=2.0

@@ -1,0 +1,22 @@
+# Пример unit для systemd: один сервис = один процесс long polling на токен.
+# Скопируйте в /etc/systemd/system/domophone-bot.service, поправьте пути и пользователя:
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now domophone-bot.service
+#   sudo journalctl -u domophone-bot.service -f
+
+[Unit]
+Description=MAX domophone bot (long polling)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/var/www/domophone_bot
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/var/www/domophone_bot/venv/bin/python -m bot.main
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
